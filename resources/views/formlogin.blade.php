@@ -19,9 +19,6 @@
                         <a class="nav-link {{ request()->segment(1) == '' || request()->segment(1) == '/' ? 'active' : '';  }}" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->segment(1) == 'registrasi' ? 'active' : '';  }}" href="registrasi">Registrasi</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link {{ request()->segment(1) == 'login' ? 'active' : '';  }}" href="login">Login</a>
                     </li>
                     @else

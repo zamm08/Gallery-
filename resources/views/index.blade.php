@@ -8,6 +8,6 @@
         </div>
     @endif
     <div class="container">
-        {{ isset(auth()->user()->username) ? 'Selamat Datang, '.auth()->user()->nama_lengkap.' di aplikasi galeri foto' : 'Anda belum login, silahkan login'; }}
+        {{ isset(auth()->user()->username) ? 'Welcome, '.auth()->user()->nama_lengkap.' di web gallery' : 'belum login, login dulu'; }}
     </div>
 @endsection

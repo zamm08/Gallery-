@@ -20,6 +20,6 @@ Route::get('registrasi',[FrontendController::class,'registrasi']);
 Route::post('post-registrasi',[FrontendController::class,'post_registrasi']);
 
 Route::get('login',[FrontendController::class,'login'])->name('login');
-Route::post('post-login',[FrontendController::class,'post_login']);
+Route::post('post-login',[FrontendController::class,'post_login'])->name('post-login');
 
 Route::post('logout',[FrontendController::class,'post_logout']);

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Contracts\Session\Session;
+// use Illuminate\Contracts\Session\Session::flush;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,21 +12,21 @@ use Illuminate\Support\Facades\Hash;
 
 class FrontendController extends Controller{
     public function index(){
-        $data['title'] = 'Aplikasi Web Gallery Noval';
+        $data['title'] = 'Web Gallery';
         $data['description'] = 'Aplikasi ini dibuat dengan tujuan menyelesaikan tugas uji kompetensi keahlian di SMKN 2 Bandar Lampung';
         
         return view('index', compact('data'));
     }
 
     public function registrasi(){
-        $data['title'] = 'Aplikasi Web Gallery Noval - Registrasi User';
+        $data['title'] = 'Web Gallery - Registrasi User';
         $data['description'] = 'Aplikasi ini dibuat dengan tujuan menyelesaikan tugas uji kompetensi keahlian di SMKN 2 Bandar Lampung';
 
         return view('registrasi', compact('data'));
     }
 
     public function login(){
-        $data['title'] = 'Aplikasi Web Gallery Noval - Login User';
+        $data['title'] = 'Web Gallery - Login User';
         $data['description'] = 'Aplikasi ini dibuat dengan tujuan menyelesaikan tugas uji kompetensi keahlian di SMKN 2 Bandar Lampung';
 
         return view('login', compact('data'));
@@ -46,7 +47,7 @@ class FrontendController extends Controller{
         // $check = User::create($data);
         $check = $this->create($data);
 
-        return redirect("login")->withSuccess('Anda Berhasil Melakukan Registrasi');
+        return redirect("login")->withSuccess('Berhasil Registrasi');
     }
 
     public function post_login(Request $request): RedirectResponse{
@@ -58,15 +59,14 @@ class FrontendController extends Controller{
         $credentials = $request->only('username','password');
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect()->intended('/')->withSuccess('Selamat anda Berhasil Login');
+            return redirect()->intended('/')->withSuccess('Sudah Login');
         }else{
-            return redirect('login')->withError('Maaf, username / password anda salah');
+            return redirect('login')->withError('username / password anda salah');
         }
     }
 
     public function post_logout(Request $request): RedirectResponse{
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        Session::flush();
         Auth::logout();
         return redirect('login');
     }
